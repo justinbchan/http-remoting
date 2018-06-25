@@ -30,13 +30,13 @@ import org.immutables.value.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-final class HostMetricsRegistry {
+public final class HostMetricsRegistry {
 
     private static final Logger log = LoggerFactory.getLogger(HostMetricsRegistry.class);
 
     private final LoadingCache<ServiceHostAndPort, DefaultHostMetrics> hostMetrics;
 
-    HostMetricsRegistry() {
+    public HostMetricsRegistry() {
         this.hostMetrics = CacheBuilder.newBuilder()
                 .maximumSize(1_000)
                 .expireAfterAccess(1, TimeUnit.DAYS)
@@ -69,7 +69,7 @@ final class HostMetricsRegistry {
         }
     }
 
-    Collection<HostMetrics> getMetrics() {
+    public Collection<HostMetrics> getMetrics() {
         return Collections.unmodifiableCollection(hostMetrics.asMap().values());
     }
 
